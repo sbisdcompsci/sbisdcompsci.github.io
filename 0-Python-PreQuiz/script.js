@@ -2,91 +2,91 @@ const quizData = [
   {
     question: "In which of the following cases will Sarah walk to work?",
     code: "Sara will drive to work...\n\nif...\n   it is raining \nor if... \n   she has to carry more than two bags. \n\nOtherwise, \n   Sarah will walk to work. ",
-    choices: ["It is sunny AND Sarah has 3 bags", "It is raining AND Sarah has 0 bags", "It is sunny AND Sarah has 2 bags", "It is raining and Sarah has 3 bags"],
+    choices: ["It is sunny AND Sarah has 3 bags", "It is raining AND Sarah has 0 bags", "It is sunny AND Sarah has 2 bags", "It is raining and Sarah has 3 bags", "I don't know"],
     correctAnswer: 2
   },
   {
     question: "What is the output of the following code snippet?",
     code: "print(1 + '1')",
-    choices: ["11", "2", "undefined", "NaN"],
+    choices: ["11", "2", "undefined", "NaN", "I don't know"],
     correctAnswer: 0
   },
   {
     question: "If Tracy the Turtle is given the following code snippet, what will she draw?",
     code: "repeat 4 times:\n    forward 100 units\n    turn left 90 degrees",
-    choices: ["A line", "a zig zag", "a trapezoid", "a square"],
+    choices: ["A line", "a zig zag", "a trapezoid", "a square", "I don't know"],
     correctAnswer: 3
   },
   {
     question: "Which of the following describes a task effectively broken into smaller parts?",
     code: "I. Baking a cake by mixing the batter and preheating the oven\nII. Comparing your favorite movies\nIII. Making a movie by writing a script, casting the actors, and \nfilming",
-    choices: ["I & II", "I & III", "II Only", "I, II, & III"],
+    choices: ["I & II", "I & III", "II Only", "I, II, & III", "I don't know"],
     correctAnswer: 2
   },
   {
     question: "Consider the following program code, where x is an input from the user. \n\nIf orange is printed, which of the following is a possible input for x?",
     code: 'if x <= 1: \n    print("apple")\nelif x < 4:\n    print("orange")\nelse: \n    print("banana")',
-    choices: ['"orange"', "1", "3", "4"],
+    choices: ['"orange"', "1", "3", "4", "I don't know"],
     correctAnswer: 2
   },
   {
     question: "What is the difference between...",
     code: " a for loop and a while loop?",
-    choices: ["A for loop repeats commands a specific number of times and a while loop repeats until a condition becomes false.", "A for loop is used when we only need to meet one condition and a while loop is used when there are two or more conditions.", "A for loop will test through an array of conditions, where as a while loop will continually test the same condition.", "A for loop is used to make decisions between two options and a while loop is used to make decisions between 3 options or more."],
+    choices: ["A for loop repeats commands a specific number of times and a while loop repeats until a condition becomes false.", "A for loop is used when we only need to meet one condition and a while loop is used when there are two or more conditions.", "A for loop will test through an array of conditions, where as a while loop will continually test the same condition.", "A for loop is used to make decisions between two options and a while loop is used to make decisions between 3 options or more.", "I don't know"],
     correctAnswer: 0
   },
   {
     question: "What is the output of the following code snippet?",
     code: "print(2 + 3 * 4);",
-    choices: ["10", "14", "20", "23"],
+    choices: ["10", "14", "20", "23", "I don't know"],
     correctAnswer: 1
   },
   {
     question: "What is the output of the following code snippet?",
     code: 'x = "hello"\nprint(x*3)',
-    choices: ["hello3", "hello hello hello", "hellohellohello", "3x", "x3"],
+    choices: ["hello3", "hello hello hello", "hellohellohello", "3x", "x3", "I don't know"],
     correctAnswer: 2
   },
   {
     question: "Which of the following...",
     code: 'is not a method of control flow?',
-    choices: ["Sequence", "Iteration", "Selection", "Functions", "Arrays"],
+    choices: ["Sequence", "Iteration", "Selection", "Functions", "Arrays", "I don't know"],
     correctAnswer: 4
   },
   {
     question: "What is the total forward distance moved when the code below is run?",
     code: "def moveForward():\n    for i in range (5):\n        forward(10)\n\nmoveForward()\nmoveForward()",
-    choices: ["5", "10", "50", "100", "150", "500"],
+    choices: ["5", "10", "50", "100", "150", "500", "I don't know"],
     correctAnswer: 1
   },
   {
     question: "What data type is contained in variable x?",
     code: "x = 5.0",
-    choices: ["float", "int", "char", "str", "bool"],
+    choices: ["float", "int", "char", "str", "bool", "I don't know"],
     correctAnswer: 0
   },
   {
     question: "What would be printed to the screen when the following program is run?",
     code: "def returnNumber(x):\n    return x *5\n\nprint(returnNumber(2))",
-    choices: ["2", "5", "10", "25"],
+    choices: ["2", "5", "10", "25", "I don't know"],
     correctAnswer: 2
   },
   {
     question: "What would be printed to the screen when the following program is run?",
     code: 'text = "banana"\n\nif "an" in text:\n    print("Yes")\nelif "ananab" in text:\n    print("Maybe")\nelse:\n    print("No")',
-    choices: ["Yes", "Yes Maybe", "Maybe", "Maybe No","No","No output"],
+    choices: ["Yes", "Yes Maybe", "Maybe", "Maybe No","No","No output", "I don't know"],
     correctAnswer: 0
   },
   {
     question: "What would be the output of the following code?",
     code: 'colors = ["red", "green", "blue", "yellow"]\ncolors.sort()\ncolors.append("orange")\ncolors.reverse()\nprint(colors)',
-    choices: ['["blue", "green", "red", "yellow", "orange"]', '["orange", "red", "green", "blue", "yellow"]', '["yellow", "red", "green", "blue", "orange"]', '["orange", "yellow", "red", "green", "blue"]'],
+    choices: ['["blue", "green", "red", "yellow", "orange"]', '["orange", "red", "green", "blue", "yellow"]', '["yellow", "red", "green", "blue", "orange"]', '["orange", "yellow", "red", "green", "blue"]', "I don't know"],
     correctAnswer: 3
   },
   {
     question: "What would be the output of the following code?",
     code: 'for i in range(3):\n    print("hi")\nprint("hello")',
-    choices: ['hi\nhi\nhi\nhello', 'hi\nhello\nhi\nhello\nhi\nhello', 'hihihi\nhellohellohello', 'hi\nhello'],
+    choices: ['hi\nhi\nhi\nhello', 'hi\nhello\nhi\nhello\nhi\nhello', 'hihihi\nhellohellohello', 'hi\nhello', "I don't know"],
     correctAnswer: 0
   }
 ];
@@ -218,7 +218,7 @@ function showResult() {
     explanationRow.innerHTML = `
       <td bgcolor="#dddddd">${i + 1}</td>
       <td>${quiz.question.substring(0,50) + "..."}</td>
-      <td${explanations[i] ? " bgcolor='#ccffcc'>Correct" : " bgcolor='#ffcccc'>Incorrect"}</td>
+      <td${explanations[i] ? " bgcolor='#ccffcc'>Correct" : " bgcolor='#ffcccc'> "}</td>
     `;
     explanationTableBody.appendChild(explanationRow);
   }
@@ -226,10 +226,7 @@ function showResult() {
   // Construct the URL with the explanations array as a query parameter
   const explanationsParam = encodeURIComponent(JSON.stringify(explanations));
   const explanationLink = document.getElementById("explanation-link");
-  explanationLink.href = `explanation.html?explanations=${explanationsParam}`;
 
-  // Show the explanation link
-  explanationLink.style.display = "block";
 }
 
 
