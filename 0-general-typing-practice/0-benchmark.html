@@ -138,9 +138,65 @@ a:active {
     <textarea class="input_area" placeholder="start typing here..." oninput="processCurrentText()"
       onfocus="startGame()"></textarea>
 	  <p></p>
+  <div id="log">Course: Computer Science 1 \\\ User:</div><br><br>
     <button class="restart_btn" onclick="resetValues()">Restart</button>
   </div>
+
 <script>
+var userFirstName = localStorage.getItem('cs1_userFirstName');
+var userLastName = localStorage.getItem('cs1_userLastName');
+  
+if (userFirstName === null) {
+    var userFirstName=prompt("Please enter your given name:");
+    if (userFirstName=="") { userFirstName="not entered /" }
+	localStorage.setItem('cs1_userFirstName', userFirstName);}
+if (userLastName === null) {
+    var userLastName=prompt("Please enter your family name:");
+    if (userLastName=="") { userLastName="/ not entered" }
+	localStorage.setItem('cs1_userLastName', userLastName);}
+
+function getDateTime() {
+    var months2 = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var sec2  = date.getSeconds();
+    sec2 = (sec2 < 10 ? "0" : "") + sec2;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+    month2 = months2[parseInt(month)-1]
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return hour + ":" + min + " on " + month2 + " " + day + ", "+ year;
+
+}
+  
+  function checkSum() {
+    var date = new Date();
+    var hour = date.getHours();
+    var min  = date.getMinutes();
+    var sec2  = date.getSeconds();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day  = date.getDate();
+
+    return String(hour+1) + String(min+1) + String(month+1) + String(day+1) + String(hour+min+month+day);
+
+}
+  
+document.getElementById("log").innerHTML = "Course: Computer Science 1 /// User: " + userFirstName +" "+ userLastName + "<br> Loaded at " + getDateTime() ;
+  
+  
 // define the time limit
 let TIME_LIMIT = 180;
 
@@ -311,6 +367,10 @@ function finishGame() {
   // display the cpm and wpm
   cpm_group.style.display = "block";
   wpm_group.style.display = "block";
+  
+  document.getElementById("log").innerHTML += "<br> Completed at " + getDateTime() ;
+  document.getElementById("log").innerHTML += "<br> Run Process ID: " + String(wpm+1) + String(cpm+1);
+  document.getElementById("log").innerHTML += "<br> Request ID: " + checkSum() ;
 }
 
 
