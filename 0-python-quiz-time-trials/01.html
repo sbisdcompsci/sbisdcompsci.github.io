@@ -125,9 +125,70 @@ button {
         <div id="timer">How many questions can you answer correctly in 90 seconds?</div>
         <div id="score">The timer starts when you answer the 1st question.</div>
         <div id="next-button">---</div>
+	    <br>
+	    <div id="log"></div>
     </div>
 
     <script>
+	    var userFirstName = localStorage.getItem('cs1_userFirstName');
+var userLastName = localStorage.getItem('cs1_userLastName');
+  
+if (userFirstName === null) {
+    var userFirstName=prompt("Please enter your given name:");
+    if (userFirstName=="") { userFirstName="not entered /" }
+	localStorage.setItem('cs1_userFirstName', userFirstName);}
+if (userLastName === null) {
+    var userLastName=prompt("Please enter your family name:");
+    if (userLastName=="") { userLastName="/ not entered" }
+	localStorage.setItem('cs1_userLastName', userLastName);}
+
+function getDateTime() {
+    var months2 = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var sec2  = date.getSeconds();
+    sec2 = (sec2 < 10 ? "0" : "") + sec2;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+    month2 = months2[parseInt(month)-1]
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return hour + ":" + min + " on " + month2 + " " + day + ", "+ year;
+
+}
+  
+  function checksum() {
+    var date = new Date();
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+    var sec2  = date.getSeconds();
+    sec2 = (sec2 < 10 ? "0" : "") + sec2;
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return parseStr(hour+1) + parseStr(min+1) + parseStr(month+1) + parseStr(day+1) + parseStr(hour+min+month+day);
+
+}
+  
+document.getElementById("log").innerHTML = "<br>Course: Computer Science 1 /// User: " + userFirstName +" "+ userLastName + "<br> Loaded at " + getDateTime() ;
+
+	    
         const questions = [
             { question: "This course is in which category?", options: ["CTE", "LOTE", "Math", "Science"], answer: 0 },
             { question: "What computer language will we focus on?", options: ["C++", "Java", "Python", "R"], answer: 2 },
@@ -238,6 +299,9 @@ button {
                     scoreElement.textContent = `Number correct: ${score} out of ${answered}`;
                     score = Math.round(score/questions.length * 100).toFixed(2);
                     nextButton.textContent = `Percentage Correct: ${score}% out of ${answered}`;
+
+			  document.getElementById("log").innerHTML += "<br> Completed at " + getDateTime() ;
+  document.getElementById("log").innerHTML += "<br> Run ID: " + checkSum() ;
                 }
             }
         }
