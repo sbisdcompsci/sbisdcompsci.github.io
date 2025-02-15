@@ -141,6 +141,61 @@ a:active {
   </div>
 
 <script>
+	var userFirstName = localStorage.getItem('cs1_userFirstName');
+var userLastName = localStorage.getItem('cs1_userLastName');
+  
+if (userFirstName === null) {
+    var userFirstName=prompt("Please enter your given name:");
+    if (userFirstName=="") { userFirstName="not entered /" }
+	localStorage.setItem('cs1_userFirstName', userFirstName);}
+if (userLastName === null) {
+    var userLastName=prompt("Please enter your family name:");
+    if (userLastName=="") { userLastName="/ not entered" }
+	localStorage.setItem('cs1_userLastName', userLastName);}
+
+function getDateTime() {
+    var months2 = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var sec2  = date.getSeconds();
+    sec2 = (sec2 < 10 ? "0" : "") + sec2;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+    month2 = months2[parseInt(month)-1]
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return hour + ":" + min + " on " + month2 + " " + day + ", "+ year;
+
+}
+  
+  function checkSum() {
+    var date = new Date();
+    var hour = date.getHours();
+    var min  = date.getMinutes();
+    var sec2  = date.getSeconds();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day  = date.getDate();
+
+    return String(hour+1) + String(min+1) + String(month+1) + String(day+1) + String(hour+min+month+day);
+
+}
+  
+document.getElementById("log").innerHTML = "Course: Computer Science 1 /// User: " + userFirstName +" "+ userLastName + "<br> Loaded at " + getDateTime() ;
+  
+
+	
 // define the time limit
 let TIME_LIMIT = 180;
 
@@ -178,7 +233,7 @@ let accuracy_text = document.querySelector(".curr_accuracy");
 let error_text = document.querySelector(".curr_errors");
 let cpm_text = document.querySelector(".curr_cpm");
 let wpm_text = document.querySelector(".curr_wpm");
-let quote_text = document.querySelector("#quote");
+let quote_text = document.querySelector(".quote");
 let input_area = document.querySelector(".input_area");
 let restart_btn = document.querySelector(".restart_btn");
 let cpm_group = document.querySelector(".cpm");
@@ -204,11 +259,8 @@ function updateQuote() {
   // out of each of them to individually style them
   current_quote.split('').forEach(char => {
     const charSpan = document.createElement('span')
-
-    charSpan.innerText = char;
-
+    charSpan.innerText = char
     quote_text.appendChild(charSpan)
-
   })
 
   // roll over to the first quote
@@ -234,19 +286,7 @@ function processCurrentText() {
     let typedChar = curr_input_array[index]
 
     // characters not currently typed
-    if (char.innerText == '·') {
-      if (typedChar == ' ') {
-        char.classList.add('correct_char');
-        char.classList.remove('incorrect_char');
-      } else{
-        char.classList.add('incorrect_char');
-        char.classList.remove('correct_char');
-      }
-
-
-      // incorrect characters
-    }
-    else if (typedChar == null) {
+    if (typedChar == null) {
       char.classList.remove('correct_char');
       char.classList.remove('incorrect_char');
 
@@ -284,10 +324,6 @@ function processCurrentText() {
     // clear the input area
     input_area.value = "";
   }
-
-  let text = document.getElementById("quote").innerHTML; 
-  document.getElementById("quote").innerHTML = text.replace("<span> </span>", "<span>·</span>");
-
 }
 
 function updateTimer() {
@@ -315,7 +351,7 @@ function finishGame() {
   input_area.disabled = true;
 
   // show finishing text
-  quote_text.textContent = "Click on restart to start a new game.";
+  quote_text.textContent = "Click Restart below to try again.";
 
   // display restart button
   restart_btn.style.display = "block";
@@ -331,6 +367,10 @@ function finishGame() {
   // display the cpm and wpm
   cpm_group.style.display = "block";
   wpm_group.style.display = "block";
+  
+  document.getElementById("log").innerHTML += "<br> Completed at " + getDateTime() ;
+  document.getElementById("log").innerHTML += "<br> Run Process ID: " + String(wpm+1) + String(cpm+1);
+  document.getElementById("log").innerHTML += "<br> Request ID: " + checkSum() ;
 }
 
 
@@ -355,7 +395,7 @@ function resetValues() {
   input_area.disabled = false;
 
   input_area.value = "";
-  quote_text.textContent = 'Click on the area below to start the game.';
+  quote_text.textContent = 'Click the area below to start the timer.';
   accuracy_text.textContent = 100;
   timer_text.textContent = timeLeft + 's';
   error_text.textContent = 0;
@@ -363,7 +403,6 @@ function resetValues() {
   cpm_group.style.display = "none";
   wpm_group.style.display = "none";
 }
-
 
 
 </script>
