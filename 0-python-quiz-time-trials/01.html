@@ -1,0 +1,261 @@
+<style>
+        body {
+  background-color: #d6eDfF;
+  color: #242C40;
+  text-align: center;
+  margin: 0;
+}
+
+a:link {
+  color: #7DE9F5;
+}
+
+a:visited {
+  color: #5bc7d3;
+}
+
+a:hover {
+  color: #9FFBF7;
+}
+
+a:active {
+  color: #FFFFFF;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-size: 3rem;
+  color: #d6eDfF;
+  background-color: #262F4B;
+	
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.timer, .errors,
+.accuracy, .cpm, .wpm {
+  background-color: #262F4B;
+  color: #85BEC3;
+  height: 60px;
+  width: 130px;
+  margin: 8px;
+  padding: 12px;
+  border-radius: 20%;
+}
+
+.cpm, .wpm  {
+  display: none;
+}
+
+.header_text {
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  font-weight: 600;
+}
+
+.curr_time, .curr_errors,
+.curr_accuracy, .curr_cpm,
+.curr_wpm {
+  font-size: 2.75rem;
+}
+
+.quote {
+  background-color: #2E323C;
+  color: #90A6A8;
+  font-size: 1.5rem;
+  margin: 10px;
+  padding: 25px;
+}
+
+.input_area {
+  background-color: #C7DBDD;
+  height: 80px;
+  width: 40%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 15px;
+  padding: 20px;
+  border: 0px;
+  box-shadow: #191A30 5px 8px 5px;
+}
+
+.incorrect_char {
+  color: #FA00DF;
+  text-decoration: underline;
+}
+
+.correct_char {
+  color: #577070;
+}
+
+button {
+  background-color: #46569B;
+  color: #ffffff;
+  font-size: 1.2rem;
+  padding: 15px 32px;
+  border: 0px;
+  border-radius: 25px;
+}
+
+#submit {
+  display: none;
+  background-color: #46569B;
+  color: #ffffff;
+  font-size: 1.2rem;
+  padding: 10px;
+  border: 0px;
+  border-radius: 5px;
+}
+    </style>
+<div class="heading">Quiz Practice <br> Time Trials</div>
+    <div id="quiz-container">
+        <h2>Unit 1: Practice 1</h2><br>
+        <h2 id="question"></h2><br>
+        <div id="options"></div>
+        <br><br><br><br>
+        <div id="timer">How many questions can you answer correctly in 90 seconds?</div>
+        <div id="score">The timer starts when you answer the 1st question.</div>
+        <div id="next-button">---</div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "This course is in which category?", options: ["CTE", "LOTE", "Math", "Science"], answer: 0 },
+            { question: "What computer language will we focus on?", options: ["C++", "Java", "Python", "R"], answer: 2 },
+            { question: "The next intended course in this pathway is...?", options: ["CS2", "Cyber Security", "Networking", "Comp. Maintanence"], answer: 0 },
+            { question: "You will have the opportunity to earn a certification in this course.", options: ["True", "False"], answer: 0 },
+            { question: "What version of Python will we focus on?", options: ["1", "2", "3"], answer: 2 },
+            { question: "You'll have the opportunity to earn a certification in Python.", options: ["True", "False"], answer: 0 },
+            { question: "You'll have the opportunity to earn a certification in C++.", options: ["True", "False"], answer: 1 },
+            { question: "You'll have the opportunity to earn a certification in Java.", options: ["True", "False"], answer: 1 },
+            { question: "You'll have the opportunity to earn a certification in R", options: ["True", "False"], answer: 1 },
+            { question: "Python is a programming language", options: ["True", "False"], answer: 0 },
+            { question: "CS1 is a prerequisite for the CyberSecurity & Networking Pathway.", options: ["True", "False"], answer: 0 },
+            { question: "Programming is a commonly required skill in higher level math classes at the university level.", options: ["True", "False"], answer: 0 },
+            { question: "Programming is a commonly required skill in higher level science classes at the university level.", options: ["True", "False"], answer: 0 },
+            { question: "Programming is a commonly required skill in engineering classes at the university level.", options: ["True", "False"], answer: 0 },
+            { question: "Programming is used in many areas, including engineering, science, arts, game design, military, and medicine.", options: ["True", "False"], answer: 0 },
+            { question: "Computer Science is a course that looks good for industry.", options: ["True", "False"], answer: 0 },
+            { question: "Computer Science is a course that looks good for university.", options: ["True", "False"], answer: 0 },
+            { question: "Computer Science is a course that looks good for both industry & university.", options: ["True", "False"], answer: 0 },
+            { question: "Python is an artificial language", options: ["True", "False"], answer: 0 },
+            { question: "Python is a/an ___________ language.", options: ["artificial", "machine", "natural"], answer: 0 },
+            { question: "English is a/an ___________ language.", options: ["artificial", "machine", "natural"], answer: 2 },
+            { question: "Python is a computer language", options: ["True", "False"], answer: 0 },
+            { question: "Python is a natural language", options: ["True", "False"], answer: 1 },
+            { question: "Python is a machine language", options: ["True", "False"], answer: 1 },
+            { question: "This course is part of the Programming and Software Development pathway", options: ["True", "False"], answer: 0 },
+            { question: "This course is part of the Cyber Security pathway", options: ["True", "False"], answer: 0 },
+            { question: "This course is part of the IT Support & Services pathway", options: ["True", "False"], answer: 1 },
+            { question: "Following this pathway can help you earn the STEM endorsement", options: ["True", "False"], answer: 0 },
+            { question: "Following this pathway can help you earn the Business & Industry endorsement", options: ["True", "False"], answer: 0 },
+            { question: "Following this pathway can earn your the Arts & Humanities endorsement", options: ["True", "False"], answer: 1 },
+            { question: "Following this pathway can earn your the Public Services endorsement", options: ["True", "False"], answer: 1 },
+            { question: "Just as we have human languages, there are also computer languages.", options: ["True", "False"], answer: 0 },
+            { question: "A process designed to perform a specific task is an algorithm.", options: ["True", "False"], answer: 0 },
+            { question: "A computer program is an implementation of an algorithm.", options: ["True", "False"], answer: 0 },
+            { question: "An algorithm should be written in a specific programming language.", options: ["True", "False"], answer: 1 },
+            { question: "The document containing a computer program is called the source code.", options: ["True", "False"], answer: 1 },
+            { question: "The document containing a computer program is called the source file.", options: ["True", "False"], answer: 0 },
+            { question: "The document containing a computer program is called the source _____.", options: ["code", "file"], answer: 1 },
+            { question: "The instructions we write to program a computer is called the source code.", options: ["True", "False"], answer: 0 },
+            { question: "The instructions we write to program a computer is called the source file.", options: ["True", "False"], answer: 1 },
+            { question: "The instructions we write to program a computer is called the source ______.", options: ["code", "file"], answer: 0 },
+            { question: "A set of instructions for a computer to perform a specific task is called a program.", options: ["True", "False"], answer: 0 },
+            { question: "A set of instructions for a computer to perform a specific task is called an algorithm.", options: ["True", "False"], answer: 1 },
+            { question: "A set of instructions for a computer to perform a specific task is a/an", options: ["Algorithm", "Language", "Program", "Source File"], answer: 2 },
+            // Add more questions here
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = 0;
+        let timeLeft = 90; // seconds
+        let timeLeftOrig = timeLeft;
+        let timerInterval;
+
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const nextButton = document.getElementById("next-button");
+        const timerElement = document.getElementById("timer");
+        const scoreElement = document.getElementById("score");
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionElement.textContent = question.question;
+            optionsElement.innerHTML = "";
+
+            const shuffledOptions = question.options;
+            shuffledOptions.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.addEventListener("click", () => checkAnswer(index));
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const question = questions[currentQuestion];
+            if (timeLeft > 0){
+                answered++;
+
+                
+                if (timeLeft > timeLeftOrig -1){
+                    timeLeft--;
+                    startTimer();
+                }
+
+                
+                if (selectedIndex === question.answer) {
+                    score++;
+                    scoreElement.textContent = "Correct! Current score: " + score;
+                } else {
+                    scoreElement.textContent = "Incorrect. Current score: " + score;
+                }
+    
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    displayQuestion();
+                } else {
+                    clearInterval(timerInterval);
+                    scoreElement.textContent = `Number correct: ${score} out of ${answered}`;
+                    score = Math.round(score/questions.length * 100).toFixed(2);
+                    nextButton.textContent = `Percentage Correct: ${score}% out of ${answered}`;
+                }
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = "Time Remaining: " + timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    scoreElement.textContent = `Number correct: ${score} out of ${answered}`;
+                    score = Math.round(score/answered * 100).toFixed(2);
+                    nextButton.textContent = `Percentage Correct: ${score}% out of ${answered}`;
+                }
+            }, 1000);
+        }
+
+
+        shuffle(questions);
+        displayQuestion();
+    </script>
